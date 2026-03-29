@@ -6,12 +6,16 @@ import { calculateHouseholdBudget } from "@/lib/calculators/household-budget";
 import { calculateCompoundInterest } from "@/lib/calculators/compound-interest";
 import { calculateLifePlan } from "@/lib/calculators/life-plan";
 import { calculateFixedCostReview } from "@/lib/calculators/fixed-cost-review";
+import { calculateMortgage } from "@/lib/calculators/mortgage-calculator";
+import { calculateTakeHomePay } from "@/lib/calculators/take-home-pay-calculator";
 
 const calculators: Record<string, (values: Record<string, number | string>) => Record<string, string | number>> = {
   "household-budget": calculateHouseholdBudget,
   "compound-interest": calculateCompoundInterest,
   "life-plan": calculateLifePlan,
   "fixed-cost-review": calculateFixedCostReview,
+  "mortgage-calculator": calculateMortgage,
+  "take-home-pay-calculator": calculateTakeHomePay,
 };
 
 interface ToolInput {
@@ -133,15 +137,18 @@ export default function Calculator({ slug, inputs, outputs }: CalculatorProps) {
 
       <div className="bg-[var(--color-bg)] rounded-lg p-4 space-y-3">
         <h3 className="font-bold text-gray-700 text-sm">計算結果</h3>
-        {outputs.map((output) => (
-          <div key={output.id} className={`flex justify-between items-start gap-2 ${output.id === "advice" ? "flex-col" : ""}`}>
-            <span className="text-gray-600 text-sm shrink-0">{output.label}</span>
-            <span className={`font-bold text-[var(--color-primary)] ${output.id === "advice" ? "text-sm leading-relaxed" : "text-lg"}`}>
-              {results[output.id]}
-              {output.unit && output.id !== "advice" && <span className="text-sm font-normal ml-1">{output.unit}</span>}
-            </span>
-          </div>
-        ))}
+        {outputs.map((output) => {
+          const isText = output.id === "advice" || output.id === "prepaymentInfo";
+          return (
+            <div key={output.id} className={`flex justify-between items-start gap-2 ${isText ? "flex-col" : ""}`}>
+              <span className="text-gray-600 text-sm shrink-0">{output.label}</span>
+              <span className={`font-bold text-[var(--color-primary)] ${isText ? "text-sm leading-relaxed" : "text-lg"}`}>
+                {results[output.id]}
+                {output.unit && !isText && <span className="text-sm font-normal ml-1">{output.unit}</span>}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -65,8 +65,11 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
       {tool.faq && tool.faq.length > 0 && <FAQ faqs={tool.faq} />}
 
       {/* YMYL disclaimer */}
-      <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-500">
-        ※ シミュレーション結果は参考値です。実際の投資・資産運用の判断は専門家（ファイナンシャルプランナー等）にご相談ください。計算に使用する数値は一般的な統計データを基にした概算です。
+      <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-500 space-y-1">
+        {"disclaimer" in tool && tool.disclaimer && (
+          <p>{tool.disclaimer as string}</p>
+        )}
+        <p>※ シミュレーション結果は参考値です。実際の投資・資産運用の判断は専門家（ファイナンシャルプランナー等）にご相談ください。計算に使用する数値は一般的な統計データを基にした概算です。</p>
       </div>
     </div>
   );
