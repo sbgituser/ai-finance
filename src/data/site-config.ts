@@ -5,7 +5,7 @@ export const siteConfig = {
   url: "https://ai-finance.kuras-plus.com",
   theme: "green" as const,
   amazonTag: "kurasplus-22",
-  ga4Id: "",
+  ga4Id: "G-4HGQ4MR8SQ",
   ogImage: "/images/og-default.png",
   twitterHandle: "",
   nav: [
