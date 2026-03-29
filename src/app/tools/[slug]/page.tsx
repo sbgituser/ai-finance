@@ -1,12 +1,14 @@
 import { notFound } from "next/navigation";
 import Breadcrumb from "@/components/Breadcrumb";
+import BlogCard from "@/components/BlogCard";
 import FAQ from "@/components/FAQ";
 import AmazonLink from "@/components/AmazonLink";
 import JsonLd from "@/components/JsonLd";
 import Calculator from "@/components/Calculator";
-import { howToSchema } from "@/lib/jsonld";
+import { howToSchema, webApplicationSchema } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
 import toolsData from "@/data/tools.json";
+import articlesData from "@/data/articles.json";
 import type { Metadata } from "next";
 
 type Tool = (typeof toolsData)[number];
@@ -19,7 +21,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const tool = toolsData.find((t) => t.slug === slug);
   if (!tool) return {};
-  return buildMetadata({ title: tool.title, description: tool.description, path: `/tools/${slug}` });
+  return buildMetadata({
+    title: tool.title,
+    description: tool.description,
+    path: `/tools/${slug}`,
+    ogImage: `/ogp/tools/${slug}.png`,
+  });
 }
 
 export default async function ToolPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -27,11 +34,16 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
   const tool = toolsData.find((t) => t.slug === slug) as Tool | undefined;
   if (!tool) notFound();
 
+  const relatedArticles = articlesData
+    .filter((a) => a.relatedTools?.includes(tool.slug))
+    .slice(0, 3);
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <Breadcrumb items={[{ name: "ツール", href: "/tools" }, { name: tool.title, href: `/tools/${tool.slug}` }]} />
 
       <JsonLd data={howToSchema(tool)} />
+      <JsonLd data={webApplicationSchema(tool)} />
 
       <h1 className="text-2xl md:text-3xl font-bold mt-4 mb-2">{tool.title}</h1>
       <p className="text-gray-500 mb-4">{tool.description}</p>
@@ -63,6 +75,17 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
       )}
 
       {tool.faq && tool.faq.length > 0 && <FAQ faqs={tool.faq} />}
+
+      {relatedArticles.length > 0 && (
+        <section className="mt-10">
+          <h2 className="text-xl font-bold mb-4">関連記事</h2>
+          <div className="space-y-3">
+            {relatedArticles.map((article) => (
+              <BlogCard key={article.slug} article={article} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* YMYL disclaimer */}
       <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-500 space-y-1">

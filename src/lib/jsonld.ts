@@ -72,6 +72,28 @@ export function howToSchema(tool: {
   };
 }
 
+export function webApplicationSchema(tool: {
+  title: string;
+  description: string;
+  slug: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: tool.title,
+    description: tool.description,
+    url: `${siteConfig.url}/tools/${tool.slug}`,
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "JPY",
+    },
+    author: { "@type": "Organization", name: siteConfig.name },
+  };
+}
+
 export function breadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",

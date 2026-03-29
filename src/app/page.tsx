@@ -5,7 +5,7 @@ import toolsData from "@/data/tools.json";
 import articlesData from "@/data/articles.json";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata = buildMetadata({});
+export const metadata = buildMetadata({ ogImage: "/ogp/default-ogp.png" });
 
 export default function HomePage() {
   return (
