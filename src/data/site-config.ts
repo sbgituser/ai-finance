@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: "サイト名",
-  description: "サイトの説明文",
-  domain: "xxx.kuras-plus.com",
-  url: "https://xxx.kuras-plus.com",
-  theme: "blue" as const,
+  name: "AIファイナンスツール",
+  description: "完全ブラウザ内完結のAI家計分析・資産シミュレーション。あなたのデータは一切外部に送信しません。",
+  domain: "ai-finance.kuras-plus.com",
+  url: "https://ai-finance.kuras-plus.com",
+  theme: "green" as const,
   amazonTag: "kurasplus-22",
-  ga4Id: "G-XXXXXXXXXX",
+  ga4Id: "",
   ogImage: "/images/og-default.png",
   twitterHandle: "",
   nav: [

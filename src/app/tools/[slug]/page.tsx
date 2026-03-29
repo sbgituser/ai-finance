@@ -34,7 +34,13 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
       <JsonLd data={howToSchema(tool)} />
 
       <h1 className="text-2xl md:text-3xl font-bold mt-4 mb-2">{tool.title}</h1>
-      <p className="text-gray-500 mb-8">{tool.description}</p>
+      <p className="text-gray-500 mb-4">{tool.description}</p>
+
+      {/* Privacy badge */}
+      <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-lg px-4 py-2 mb-6 text-sm text-green-700">
+        <span>🔒</span>
+        <span>入力データはブラウザ内でのみ処理されます。サーバーへの送信は一切ありません。</span>
+      </div>
 
       <Calculator
         slug={tool.slug}
@@ -57,6 +63,11 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
       )}
 
       {tool.faq && tool.faq.length > 0 && <FAQ faqs={tool.faq} />}
+
+      {/* YMYL disclaimer */}
+      <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-500">
+        ※ シミュレーション結果は参考値です。実際の投資・資産運用の判断は専門家（ファイナンシャルプランナー等）にご相談ください。計算に使用する数値は一般的な統計データを基にした概算です。
+      </div>
     </div>
   );
 }

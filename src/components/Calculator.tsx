@@ -2,12 +2,16 @@
 
 import { useState, useCallback } from "react";
 import { trackToolUse } from "@/lib/analytics";
-import { calculateBmi } from "@/lib/calculators/bmi";
-import { calculateCalorie } from "@/lib/calculators/calorie";
+import { calculateHouseholdBudget } from "@/lib/calculators/household-budget";
+import { calculateCompoundInterest } from "@/lib/calculators/compound-interest";
+import { calculateLifePlan } from "@/lib/calculators/life-plan";
+import { calculateFixedCostReview } from "@/lib/calculators/fixed-cost-review";
 
 const calculators: Record<string, (values: Record<string, number | string>) => Record<string, string | number>> = {
-  "bmi-calculator": calculateBmi,
-  "calorie-calculator": calculateCalorie,
+  "household-budget": calculateHouseholdBudget,
+  "compound-interest": calculateCompoundInterest,
+  "life-plan": calculateLifePlan,
+  "fixed-cost-review": calculateFixedCostReview,
 };
 
 interface ToolInput {
@@ -29,6 +33,46 @@ interface CalculatorProps {
   slug: string;
   inputs: ToolInput[];
   outputs: ToolOutput[];
+}
+
+// Bar chart for household-budget: show expense breakdown as percentage bars
+function ExpenseBreakdown({ values }: { values: Record<string, number | string> }) {
+  const income = Number(values.income) || 1;
+  const items = [
+    { label: "家賃・住宅", key: "rent", color: "#059669" },
+    { label: "食費", key: "food", color: "#10B981" },
+    { label: "光熱費", key: "utilities", color: "#34D399" },
+    { label: "通信費", key: "communication", color: "#6EE7B7" },
+    { label: "交通費", key: "transport", color: "#A7F3D0" },
+    { label: "保険料", key: "insurance", color: "#D1FAE5" },
+    { label: "その他", key: "other", color: "#ECFDF5" },
+  ];
+
+  return (
+    <div className="mt-4 mb-2">
+      <h3 className="font-bold text-gray-700 text-sm mb-3">支出内訳（収入比）</h3>
+      <div className="space-y-2">
+        {items.map((item) => {
+          const amount = Number(values[item.key]) || 0;
+          const pct = Math.min(100, (amount / income) * 100);
+          return (
+            <div key={item.key}>
+              <div className="flex justify-between text-xs text-gray-500 mb-0.5">
+                <span>{item.label}</span>
+                <span>{amount.toLocaleString("ja-JP")}円 ({pct.toFixed(1)}%)</span>
+              </div>
+              <div className="w-full bg-gray-100 rounded-full h-3">
+                <div
+                  className="h-3 rounded-full"
+                  style={{ width: `${pct}%`, backgroundColor: item.color, border: "1px solid #059669" }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 export default function Calculator({ slug, inputs, outputs }: CalculatorProps) {
@@ -85,14 +129,16 @@ export default function Calculator({ slug, inputs, outputs }: CalculatorProps) {
         ))}
       </div>
 
+      {slug === "household-budget" && <ExpenseBreakdown values={values} />}
+
       <div className="bg-[var(--color-bg)] rounded-lg p-4 space-y-3">
         <h3 className="font-bold text-gray-700 text-sm">計算結果</h3>
         {outputs.map((output) => (
-          <div key={output.id} className="flex justify-between items-center">
-            <span className="text-gray-600 text-sm">{output.label}</span>
-            <span className="font-bold text-[var(--color-primary)] text-lg">
+          <div key={output.id} className={`flex justify-between items-start gap-2 ${output.id === "advice" ? "flex-col" : ""}`}>
+            <span className="text-gray-600 text-sm shrink-0">{output.label}</span>
+            <span className={`font-bold text-[var(--color-primary)] ${output.id === "advice" ? "text-sm leading-relaxed" : "text-lg"}`}>
               {results[output.id]}
-              {output.unit && <span className="text-sm font-normal ml-1">{output.unit}</span>}
+              {output.unit && output.id !== "advice" && <span className="text-sm font-normal ml-1">{output.unit}</span>}
             </span>
           </div>
         ))}

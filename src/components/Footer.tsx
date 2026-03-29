@@ -30,11 +30,19 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-8 pt-6 border-t border-gray-700 text-center text-sm">
-          <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-          <p className="mt-1 text-xs">
-            Amazonのアソシエイトとして、{siteConfig.name}は適格販売により収入を得ています。
-          </p>
+        <div className="mt-8 pt-6 border-t border-gray-700">
+          <div className="flex items-center justify-center gap-2 bg-green-900 rounded-lg px-4 py-3 mb-4">
+            <span className="text-green-400 text-lg">🔒</span>
+            <p className="text-green-300 text-sm font-medium">
+              このサイトの全ツールはブラウザ内で完結します。入力データは一切サーバーに送信されません。
+            </p>
+          </div>
+          <div className="text-center text-sm">
+            <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+            <p className="mt-1 text-xs">
+              Amazonのアソシエイトとして、{siteConfig.name}は適格販売により収入を得ています。
+            </p>
+          </div>
         </div>
       </div>
     </footer>

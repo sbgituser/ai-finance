@@ -1,50 +1,129 @@
 [
   {
-    "slug": "bmi-calculator",
-    "title": "BMI計算ツール",
-    "description": "身長と体重を入力してBMIを瞬時に計算。肥満度や標準体重もわかります。",
-    "category": "健康・フィットネス",
-    "icon": "Calculator",
+    "slug": "household-budget",
+    "title": "家計支出分析シミュレーター",
+    "description": "月収と各支出項目を入力すると、支出割合と理想比率との差分、節約ポイントを自動で提案します。",
+    "category": "家計管理",
+    "icon": "PieChart",
     "inputs": [
-      { "id": "height", "label": "身長", "type": "number", "unit": "cm", "default": 170 },
-      { "id": "weight", "label": "体重", "type": "number", "unit": "kg", "default": 65 }
+      { "id": "income", "label": "月収（手取り）", "type": "number", "unit": "円", "default": 280000 },
+      { "id": "rent", "label": "家賃・住宅ローン", "type": "number", "unit": "円", "default": 80000 },
+      { "id": "food", "label": "食費", "type": "number", "unit": "円", "default": 50000 },
+      { "id": "utilities", "label": "光熱費", "type": "number", "unit": "円", "default": 15000 },
+      { "id": "communication", "label": "通信費", "type": "number", "unit": "円", "default": 10000 },
+      { "id": "transport", "label": "交通費", "type": "number", "unit": "円", "default": 15000 },
+      { "id": "insurance", "label": "保険料", "type": "number", "unit": "円", "default": 20000 },
+      { "id": "other", "label": "その他支出", "type": "number", "unit": "円", "default": 30000 }
     ],
     "outputs": [
-      { "id": "bmi", "label": "BMI", "unit": "" },
-      { "id": "category", "label": "判定", "unit": "" },
-      { "id": "standardWeight", "label": "標準体重", "unit": "kg" }
+      { "id": "totalExpense", "label": "支出合計", "unit": "円" },
+      { "id": "savings", "label": "貯蓄可能額", "unit": "円" },
+      { "id": "savingsRate", "label": "貯蓄率", "unit": "%" },
+      { "id": "rentRate", "label": "住居費率（推奨：〜30%）", "unit": "%" },
+      { "id": "foodRate", "label": "食費率（推奨：〜15%）", "unit": "%" },
+      { "id": "advice", "label": "節約ポイント", "unit": "" }
     ],
     "relatedProducts": [
-      { "asin": "B08XYZ1234", "title": "体組成計 スマート体重計" }
+      { "asin": "4534059019", "title": "ズボラな人のための家計管理超入門" },
+      { "asin": "4492534121", "title": "お金の大学" }
     ],
     "faq": [
-      { "q": "BMIとは何ですか？", "a": "BMI（Body Mass Index）は体重と身長から算出される肥満度の指標です。" },
-      { "q": "BMI 22が標準体重の理由は？", "a": "統計的に最も疾病リスクが低いBMI値として22が設定されています。" }
+      { "q": "理想の貯蓄率はどれくらいですか？", "a": "一般的に手取りの10〜20%が理想とされています。まずは10%を目標にしましょう。" },
+      { "q": "住居費の目安は？", "a": "手取りの25〜30%以内が目安です。家賃が高い都市部では30%を超えることもありますが、なるべく抑えるのがポイントです。" },
+      { "q": "このツールのデータはどこに保存されますか？", "a": "入力データはブラウザ内でのみ処理され、サーバーには一切送信されません。プライバシーは完全に保護されます。" }
     ]
   },
   {
-    "slug": "calorie-calculator",
-    "title": "カロリー計算ツール",
-    "description": "年齢・性別・活動量から1日の必要カロリーを計算します。ダイエット・筋トレに。",
-    "category": "健康・フィットネス",
-    "icon": "Fire",
+    "slug": "compound-interest",
+    "title": "複利計算・資産形成シミュレーター",
+    "description": "初期投資額と月間積立額、想定利回りを入力して、将来の資産を複利効果で計算します。",
+    "category": "資産形成",
+    "icon": "TrendingUp",
     "inputs": [
-      { "id": "age", "label": "年齢", "type": "number", "unit": "歳", "default": 30 },
-      { "id": "gender", "label": "性別", "type": "select", "options": ["男性", "女性"], "default": "男性" },
-      { "id": "height", "label": "身長", "type": "number", "unit": "cm", "default": 170 },
-      { "id": "weight", "label": "体重", "type": "number", "unit": "kg", "default": 65 },
-      { "id": "activity", "label": "活動レベル", "type": "select", "options": ["低い（座り仕事）", "普通（軽い運動）", "高い（激しい運動）"], "default": "普通（軽い運動）" }
+      { "id": "initialAmount", "label": "初期投資額", "type": "number", "unit": "円", "default": 500000 },
+      { "id": "monthlyAmount", "label": "月間積立額", "type": "number", "unit": "円", "default": 30000 },
+      { "id": "annualRate", "label": "想定利回り（年率）", "type": "number", "unit": "%", "default": 5 },
+      { "id": "years", "label": "運用期間", "type": "number", "unit": "年", "default": 20 }
     ],
     "outputs": [
-      { "id": "bmr", "label": "基礎代謝量", "unit": "kcal/日" },
-      { "id": "tdee", "label": "1日の必要カロリー", "unit": "kcal/日" }
+      { "id": "finalAmount", "label": "最終資産額", "unit": "円" },
+      { "id": "principal", "label": "元本合計", "unit": "円" },
+      { "id": "profit", "label": "運用益（複利効果）", "unit": "円" },
+      { "id": "profitRate", "label": "運用益率", "unit": "%" },
+      { "id": "doubleYears", "label": "資産が2倍になる目安", "unit": "年" }
     ],
     "relatedProducts": [
-      { "asin": "B09ABC5678", "title": "カロリー管理アプリ対応スマートウォッチ" }
+      { "asin": "4478107815", "title": "敗者のゲーム" },
+      { "asin": "4344903676", "title": "お金は寝かせて増やしなさい" }
     ],
     "faq": [
-      { "q": "基礎代謝とは何ですか？", "a": "生命維持に最低限必要なエネルギー量です。呼吸や体温調節などに使われます。" },
-      { "q": "このカロリーより少なく食べれば痩せますか？", "a": "必要カロリーより少ない摂取量を維持することで体重が減少します。ただし極端な制限は避けましょう。" }
+      { "q": "複利とは何ですか？", "a": "元本だけでなく、利子にも利子がつく仕組みです。長期運用ほど複利効果は大きくなります。" },
+      { "q": "年利5%は現実的ですか？", "a": "全世界株式インデックスファンドの長期平均リターンは5〜7%程度とされています。ただし将来のリターンを保証するものではありません。" },
+      { "q": "シミュレーション結果の注意点は？", "a": "この計算は参考値です。実際の投資結果は市場状況により異なります。投資判断は専門家にご相談ください。" }
+    ]
+  },
+  {
+    "slug": "life-plan",
+    "title": "ライフプランコスト計算機",
+    "description": "現在年齢と将来のライフイベント（結婚・出産・住宅・車）を入力して、必要な資金と毎年の貯蓄目標額を計算します。",
+    "category": "ライフプラン",
+    "icon": "Map",
+    "inputs": [
+      { "id": "currentAge", "label": "現在の年齢", "type": "number", "unit": "歳", "default": 30 },
+      { "id": "currentSavings", "label": "現在の貯蓄額", "type": "number", "unit": "円", "default": 2000000 },
+      { "id": "marriage", "label": "結婚予定", "type": "select", "options": ["なし", "1〜3年以内", "3〜5年以内", "5年以上先"], "default": "3〜5年以内" },
+      { "id": "children", "label": "子どもの人数（予定）", "type": "select", "options": ["0人", "1人", "2人", "3人以上"], "default": "1人" },
+      { "id": "house", "label": "住宅購入予定", "type": "select", "options": ["なし（賃貸）", "5年以内", "5〜10年以内", "10年以上先"], "default": "5〜10年以内" },
+      { "id": "car", "label": "車の購入予定", "type": "select", "options": ["なし", "3年以内", "3〜7年以内", "7年以上先"], "default": "3〜7年以内" }
+    ],
+    "outputs": [
+      { "id": "totalEventCost", "label": "ライフイベント総費用（概算）", "unit": "円" },
+      { "id": "educationCost", "label": "教育費合計（概算）", "unit": "円" },
+      { "id": "annualSavingsNeeded", "label": "65歳までの年間必要貯蓄額", "unit": "円" },
+      { "id": "estimatedAssets65", "label": "現在の貯蓄ペースでの65歳時推定資産", "unit": "円" },
+      { "id": "gap", "label": "老後資金の過不足（概算）", "unit": "円" }
+    ],
+    "relatedProducts": [
+      { "asin": "4761276231", "title": "人生100年時代のお金の教科書" },
+      { "asin": "4534058489", "title": "FP3級 完全攻略テキスト" }
+    ],
+    "faq": [
+      { "q": "ライフイベントの費用はどこから取っていますか？", "a": "結婚費用は平均357万円（ゼクシィ調査）、住宅購入は全国平均3,500万円（国土交通省）、子ども一人の教育費は1,000〜2,000万円（文部科学省）などの公的データを参考にしています。" },
+      { "q": "老後資金の目安は？", "a": "総務省家計調査によると、夫婦2人の老後生活費は月約27万円。65〜90歳の25年間で約8,100万円が必要とされます（公的年金受給分を除く）。" },
+      { "q": "計算結果はどこに保存されますか？", "a": "入力データは一切サーバーに送信されず、ブラウザ内でのみ計算されます。" }
+    ]
+  },
+  {
+    "slug": "fixed-cost-review",
+    "title": "固定費見直し節約計算機",
+    "description": "現在の固定費を入力し、格安SIM・電力会社変更などの見直し候補と比較して年間・10年間の節約効果を計算します。",
+    "category": "節約",
+    "icon": "Scissors",
+    "inputs": [
+      { "id": "mobilePhone", "label": "現在の携帯料金（月）", "type": "number", "unit": "円", "default": 8000 },
+      { "id": "electricity", "label": "現在の電気代（月）", "type": "number", "unit": "円", "default": 12000 },
+      { "id": "gas", "label": "現在のガス代（月）", "type": "number", "unit": "円", "default": 5000 },
+      { "id": "internet", "label": "現在のネット回線料金（月）", "type": "number", "unit": "円", "default": 5500 },
+      { "id": "subscription", "label": "各種サブスク合計（月）", "type": "number", "unit": "円", "default": 5000 },
+      { "id": "newMobile", "label": "格安SIM後の携帯料金（月）", "type": "number", "unit": "円", "default": 2000 },
+      { "id": "newElectricity", "label": "切替後の電気代（月）", "type": "number", "unit": "円", "default": 10000 },
+      { "id": "newSubscription", "label": "見直し後のサブスク（月）", "type": "number", "unit": "円", "default": 3000 }
+    ],
+    "outputs": [
+      { "id": "currentMonthly", "label": "現在の月間固定費合計", "unit": "円" },
+      { "id": "newMonthly", "label": "見直し後の月間固定費合計", "unit": "円" },
+      { "id": "monthlyReduction", "label": "月間削減額", "unit": "円" },
+      { "id": "annualSavings", "label": "年間節約額", "unit": "円" },
+      { "id": "tenYearSavings", "label": "10年間の節約総額", "unit": "円" }
+    ],
+    "relatedProducts": [
+      { "asin": "4534059026", "title": "節約・貯蓄・投資の前に今さら聞けないお金の超基本" },
+      { "asin": "4479396047", "title": "固定費を見直すだけで年100万円貯まる" }
+    ],
+    "faq": [
+      { "q": "格安SIMに変えると月いくら節約できますか？", "a": "大手キャリアから格安SIM（IIJmio・楽天モバイル等）に変えると、月3,000〜6,000円程度節約できるケースが多いです。年間では36,000〜72,000円の節約になります。" },
+      { "q": "電力会社の切り替えで節約できますか？", "a": "2016年の電力自由化以降、新電力会社に切り替えることで5〜10%程度の節約が見込める場合があります。ただし各社のプランを比較してご検討ください。" },
+      { "q": "10年後の節約総額に利子は含まれますか？", "a": "この計算は単純累計です。節約分を投資に回した場合はさらに資産が増える可能性があります。" }
     ]
   }
 ]
