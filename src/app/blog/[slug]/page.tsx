@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Breadcrumb from "@/components/Breadcrumb";
 import ToolCard from "@/components/ToolCard";
+import FAQ from "@/components/FAQ";
 import JsonLd from "@/components/JsonLd";
 import { articleSchema } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
@@ -60,6 +61,10 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
           return <p key={i} className="text-gray-700 leading-relaxed mb-4">{para}</p>;
         })}
       </div>
+
+      {"faq" in article && article.faq && (
+        <FAQ faqs={article.faq as { q: string; a: string }[]} />
+      )}
 
       {relatedTools.length > 0 && (
         <section className="mt-12">
