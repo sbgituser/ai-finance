@@ -5,8 +5,9 @@ import { siteConfig } from "@/data/site-config";
 import articlesData from "@/data/articles.json";
 
 export const metadata = buildMetadata({
-  title: "ブログ",
-  description: `${siteConfig.name}の記事一覧。役立つ情報を発信しています。`,
+  title: "AI×家計管理・資産運用ガイド｜最新記事一覧",
+  description:
+    "AI家計管理・資産形成・節約術・住宅ローン・投資の始め方まで、お金にまつわる実践ガイドを発信。ブラウザ完結の無料シミュレーターと連携した記事で家計改善をサポートします。",
   path: "/blog",
   ogImage: "/ogp/default-ogp.png",
 });

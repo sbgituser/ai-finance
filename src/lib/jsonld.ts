@@ -22,6 +22,7 @@ export function articleSchema(article: {
   updatedAt: string;
   url: string;
   image?: string;
+  author?: { name: string; description?: string };
 }) {
   return {
     "@context": "https://schema.org",
@@ -32,7 +33,14 @@ export function articleSchema(article: {
     dateModified: article.updatedAt,
     url: article.url,
     image: article.image ?? siteConfig.ogImage,
-    author: { "@type": "Organization", name: siteConfig.name },
+    author: article.author
+      ? {
+          "@type": "Person",
+          name: article.author.name,
+          ...(article.author.description && { description: article.author.description }),
+          url: `${siteConfig.url}/about`,
+        }
+      : { "@type": "Organization", name: siteConfig.name },
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,

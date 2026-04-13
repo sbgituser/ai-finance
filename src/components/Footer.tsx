@@ -25,8 +25,8 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-bold mb-2">サイト情報</h3>
             <ul className="space-y-1 text-sm">
+              <li><Link href="/about" className="hover:text-white transition-colors">運営者情報</Link></li>
               <li><Link href="/privacy" className="hover:text-white transition-colors">プライバシーポリシー</Link></li>
-              <li><Link href="/disclaimer" className="hover:text-white transition-colors">免責事項</Link></li>
             </ul>
           </div>
         </div>

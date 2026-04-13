@@ -5,8 +5,9 @@ import { siteConfig } from "@/data/site-config";
 import toolsData from "@/data/tools.json";
 
 export const metadata = buildMetadata({
-  title: "ツール一覧",
-  description: `${siteConfig.name}の便利なツール一覧。無料で使えるオンラインツールを多数提供しています。`,
+  title: "無料オンライン家計・資産シミュレーター6選｜ブラウザ完結で安心",
+  description:
+    "家計支出分析・複利計算・住宅ローン・手取り計算など無料のAI家計シミュレーターを一覧で紹介。すべてブラウザ完結でデータ送信なし、プライバシーも安心です。",
   path: "/tools",
   ogImage: "/ogp/default-ogp.png",
 });

@@ -5,7 +5,13 @@ import toolsData from "@/data/tools.json";
 import articlesData from "@/data/articles.json";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata = buildMetadata({ ogImage: "/ogp/default-ogp.png" });
+export const metadata = buildMetadata({
+  title: "AI家計管理・資産形成シミュレーション｜無料＆プライバシー安全｜AIファイナンスツール",
+  titleOverride: true,
+  description:
+    "完全ブラウザ完結・データ送信なしの無料AI家計管理ツール。家計支出分析、複利計算、住宅ローン、手取り計算など6つのシミュレーターで資産形成をサポートします。",
+  ogImage: "/ogp/default-ogp.png",
+});
 
 export default function HomePage() {
   return (

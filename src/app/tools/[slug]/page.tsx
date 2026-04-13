@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!tool) return {};
   return buildMetadata({
     title: tool.title,
-    description: tool.description,
+    description: `【無料・ブラウザ完結】${tool.description}データ送信なしでプライバシーも安心。`,
     path: `/tools/${slug}`,
     ogImage: `/ogp/tools/${slug}.png`,
   });

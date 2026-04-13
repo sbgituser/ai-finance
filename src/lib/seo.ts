@@ -6,10 +6,12 @@ interface SeoProps {
   description?: string;
   path?: string;
   ogImage?: string;
+  /** true = use title as-is without appending site name */
+  titleOverride?: boolean;
 }
 
-export function buildMetadata({ title, description, path = "/", ogImage }: SeoProps): Metadata {
-  const fullTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
+export function buildMetadata({ title, description, path = "/", ogImage, titleOverride }: SeoProps): Metadata {
+  const fullTitle = titleOverride && title ? title : title ? `${title} | ${siteConfig.name}` : siteConfig.name;
   const desc = description ?? siteConfig.description;
   const url = `${siteConfig.url}${path}`;
   const image = ogImage ?? siteConfig.ogImage;
