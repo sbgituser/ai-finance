@@ -34,6 +34,20 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* FAQ / Q&A Articles */}
+      <section className="max-w-6xl mx-auto px-4 pb-12">
+        <h2 className="text-2xl font-bold mb-6">よくある質問 — 年収の壁・手取り2026年</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {articlesData
+            .filter((a) =>
+              ["nenshunokabe-178man-itsu-kara", "130man-kabe-haishi-106man-henkou", "tedori-simulation-guide"].includes(a.slug)
+            )
+            .map((article) => (
+              <BlogCard key={article.slug} article={article} />
+            ))}
+        </div>
+      </section>
+
       {/* Latest Articles */}
       <section className="max-w-6xl mx-auto px-4 pb-12">
         <h2 className="text-2xl font-bold mb-6">最新記事</h2>
